@@ -1,7 +1,7 @@
 {
     "name": "vibox",
     "description": "Node.js cli helper for VirtualBox management",
-    "version": "0.1.0",
+    "version": "0.0.1",
     "homepage": "https://github.com/leny/vibox",
     "author": {
         "name": "Leny",
@@ -25,7 +25,6 @@
         "node": ">= 0.8.0"
     },
     "dependencies": {
-        "complete": "~0.4.3"
     },
     "preferGlobal": "true",
     "bin": {
