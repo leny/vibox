@@ -30,6 +30,6 @@
     "preferGlobal": "true",
     "bin": {
         "vibox" : "lib/vibox.js"
-    }
+    },
     "keywords": []
 }
