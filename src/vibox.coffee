@@ -33,4 +33,9 @@ program
     .option( '-h, --headless', 'Start VM headless (no GUI)' )
     .action( require( './modules/control' ).start )
 
+program
+    .command( 'control <uid|name> <action>' )
+    .description( 'control VM (start|headless|pause|resume|stop|reset|poweroff)' )
+    .action( require( './modules/control' ).control )
+
 program.parse( process.argv )
