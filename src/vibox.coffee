@@ -27,4 +27,10 @@ program
     .option( '-f, --full', 'Display full informations' )
     .action( require( './modules/show' ).exec )
 
+program
+    .command( 'start <uid|name>' )
+    .description( 'start VM' )
+    .option( '-h, --headless', 'Start VM headless (no GUI)' )
+    .action( require( './modules/control' ).start )
+
 program.parse( process.argv )

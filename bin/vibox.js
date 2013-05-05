@@ -21,4 +21,6 @@ program.command('list').description('list VMs').option('-s, --state', 'Display s
 
 program.command('show <uid|name>').description('show information about specific VM').option('-f, --full', 'Display full informations').action(require('./modules/show').exec);
 
+program.command('start <uid|name>').description('start VM').option('-h, --headless', 'Start VM headless (no GUI)').action(require('./modules/control').start);
+
 program.parse(process.argv);
