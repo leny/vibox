@@ -17,7 +17,7 @@ word = ( val ) ->
 
 program
     .version( vibox_pkg.version )
-    .option( '--initpath', 'init path completion' )
+    .option( '--initpath', '[internal] init path completion' )
 
 program
     .command( 'list' )
@@ -45,10 +45,12 @@ program
 
 program
     .command( 'commands' )
+    .description( '[internal] list all commands (used for completion)' )
     .action( require( './modules/completion' ).commands )
 
 program
     .command( 'completions <cmd>' )
+    .description( '[internal] list escaped VMs names (used for completion)' )
     .action( require( './modules/completion' ).vms )
 
 program.parse( process.argv )
