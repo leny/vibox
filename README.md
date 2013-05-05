@@ -2,6 +2,8 @@
 
 Node.js cli helper for VirtualBox management
 
+* * *
+
 ## Getting Started
 Install the module with: `npm install vibox`
 

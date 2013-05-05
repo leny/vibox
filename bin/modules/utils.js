@@ -1,4 +1,4 @@
-var aAvailableCommands, aVBoxesUIDs, exec, getVBoxes, iCurrentIndex, oVBoxes, os, rClearQuotes, rVMName;
+var aAvailableCommands, aVBoxesUIDs, exec, getVBoxes, iCurrentIndex, oVBoxes, os, rClearQuotes, rSharedFolder, rVMName;
 
 exec = require('child_process').exec;
 
@@ -15,6 +15,8 @@ aAvailableCommands = ['start', 'list'];
 rVMName = /^".+"\s\{(.+)\}\s*$/;
 
 rClearQuotes = /"/g;
+
+rSharedFolder = /^SharedFolder(Name|Path)MachineMapping(\d+)$/i;
 
 getVBoxes = function(fCallback) {
   return exec('VBoxManage list vms', function(oError, sOut, sErr) {
@@ -37,15 +39,27 @@ getVBoxes = function(fCallback) {
     for (_i = 0, _len = aVBoxesUIDs.length; _i < _len; _i++) {
       sCurrentVMID = aVBoxesUIDs[_i];
       _results.push(exec('VBoxManage showvminfo ' + sCurrentVMID + ' --machinereadable', function(oError, sOut, sErr) {
-        var aCurrentInfo, oVMInfos, sCurrentInfo, _j, _len1, _ref, _ref1;
+        var aCurrentInfo, aSharedFolderInfos, aSharedFolders, iSharedFolderIndex, oVMInfos, sCurrentInfo, sCurrentProperty, _j, _len1, _ref, _ref1, _ref2;
         oVMInfos = {};
+        aSharedFolders = [];
         _ref = sOut.split(os.EOL);
         for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
           sCurrentInfo = _ref[_j];
           aCurrentInfo = sCurrentInfo.split('=');
-          oVMInfos[aCurrentInfo[0].replace(rClearQuotes, '')] = (_ref1 = aCurrentInfo[1]) != null ? _ref1.replace(rClearQuotes, '') : void 0;
+          sCurrentProperty = aCurrentInfo[0].replace(rClearQuotes, '');
+          if (rSharedFolder.test(sCurrentProperty)) {
+            aSharedFolderInfos = rSharedFolder.exec(sCurrentProperty);
+            iSharedFolderIndex = parseFloat(aSharedFolderInfos[2]) - 1;
+            if (!aSharedFolders[iSharedFolderIndex]) {
+              aSharedFolders[iSharedFolderIndex] = {};
+            }
+            aSharedFolders[iSharedFolderIndex][aSharedFolderInfos[1].trim().toLowerCase()] = (_ref1 = aCurrentInfo[1]) != null ? _ref1.replace(rClearQuotes, '') : void 0;
+          } else {
+            oVMInfos[sCurrentProperty] = (_ref2 = aCurrentInfo[1]) != null ? _ref2.replace(rClearQuotes, '') : void 0;
+          }
         }
         oVMInfos.state = oVMInfos.VMState;
+        oVMInfos.SharedFolders = aSharedFolders;
         oVBoxes[oVMInfos.UUID] = oVMInfos;
         iCurrentIndex--;
         if (iCurrentIndex === 0) {
