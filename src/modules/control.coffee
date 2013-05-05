@@ -18,7 +18,7 @@ parseCommand = ( sVMIdentifier, sAction ) ->
     require( './utils' ).getVBoxes ( oResponse ) ->
         sVMIdentifier = sVMIdentifier.trim()
         for sUID, oVM of oResponse
-            if sUID is sVMIdentifier or oVM.name is sVMIdentifier
+            if sUID is sVMIdentifier or oVM.name is sVMIdentifier or oVM.escaped_name is sVMIdentifier
                 switch sAction
                     when 'start' then return startVM oVM, no
                     when 'headless' then return startVM oVM, yes
@@ -29,8 +29,7 @@ parseCommand = ( sVMIdentifier, sAction ) ->
         console.log clc.red.bold 'Unknown VM "' + sVMIdentifier + '"'
 
 exports.start = ( vm, program ) ->
-    console.log vm
     parseCommand vm, ( if program.headless then 'headless' else 'start' )
 
-exports.control = ( vm, action ) ->
+exports.control = ( vm, action, program ) ->
     parseCommand vm, action

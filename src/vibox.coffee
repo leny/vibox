@@ -8,11 +8,16 @@
 
 "use strict"
 
+path = require 'path'
 program = require 'commander'
 vibox_pkg = require '../package.json'
 
+word = ( val ) ->
+    return val
+
 program
     .version( vibox_pkg.version )
+    .option( '--initpath', 'init path completion' )
 
 program
     .command( 'list' )
@@ -38,4 +43,15 @@ program
     .description( 'control VM (start|headless|pause|resume|stop|reset|poweroff)' )
     .action( require( './modules/control' ).control )
 
+program
+    .command( 'commands' )
+    .action( require( './modules/completion' ).commands )
+
+program
+    .command( 'completions <cmd>' )
+    .action( require( './modules/completion' ).vms )
+
 program.parse( process.argv )
+
+if program.initpath
+    console.log path.resolve __dirname + '/../shell/init'

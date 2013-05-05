@@ -9,13 +9,19 @@
 
 "use strict";
 
-var program, vibox_pkg;
+var path, program, vibox_pkg, word;
+
+path = require('path');
 
 program = require('commander');
 
 vibox_pkg = require('../package.json');
 
-program.version(vibox_pkg.version);
+word = function(val) {
+  return val;
+};
+
+program.version(vibox_pkg.version).option('--initpath', 'init path completion');
 
 program.command('list').description('list VMs').option('-s, --state', 'Display state').option('-r, --running', 'Show running VMs only').action(require('./modules/list').exec);
 
@@ -25,4 +31,12 @@ program.command('start <uid|name>').description('start VM').option('-h, --headle
 
 program.command('control <uid|name> <action>').description('control VM (start|headless|pause|resume|stop|reset|poweroff)').action(require('./modules/control').control);
 
+program.command('commands').action(require('./modules/completion').commands);
+
+program.command('completions <cmd>').action(require('./modules/completion').vms);
+
 program.parse(process.argv);
+
+if (program.initpath) {
+  console.log(path.resolve(__dirname + '/../shell/init'));
+}

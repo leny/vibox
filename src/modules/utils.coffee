@@ -7,6 +7,7 @@ iCurrentIndex = 0
 aAvailableCommands = [ 'start', 'list' ]
 rVMName = /^".+"\s\{(.+)\}\s*$/
 rClearQuotes = /"/g
+rClearSpaces = /\s/g
 rSharedFolder = /^SharedFolder(Name|Path)MachineMapping(\d+)$/i
 
 getVBoxes = ( fCallback ) ->
@@ -31,6 +32,7 @@ getVBoxes = ( fCallback ) ->
                         aSharedFolders[ iSharedFolderIndex ][ aSharedFolderInfos[ 1 ].trim().toLowerCase() ] = aCurrentInfo[ 1 ]?.replace rClearQuotes, ''
                     else
                         oVMInfos[ sCurrentProperty ] = aCurrentInfo[ 1 ]?.replace rClearQuotes, ''
+                oVMInfos.escaped_name = oVMInfos.name.replace rClearSpaces, '_'
                 oVMInfos.state = oVMInfos.VMState
                 oVMInfos.SharedFolders = aSharedFolders
                 oVBoxes[ oVMInfos.UUID ] = oVMInfos

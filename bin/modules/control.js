@@ -34,7 +34,7 @@ parseCommand = function(sVMIdentifier, sAction) {
     sVMIdentifier = sVMIdentifier.trim();
     for (sUID in oResponse) {
       oVM = oResponse[sUID];
-      if (sUID === sVMIdentifier || oVM.name === sVMIdentifier) {
+      if (sUID === sVMIdentifier || oVM.name === sVMIdentifier || oVM.escaped_name === sVMIdentifier) {
         switch (sAction) {
           case 'start':
             return startVM(oVM, false);
@@ -57,10 +57,9 @@ parseCommand = function(sVMIdentifier, sAction) {
 };
 
 exports.start = function(vm, program) {
-  console.log(vm);
   return parseCommand(vm, (program.headless ? 'headless' : 'start'));
 };
 
-exports.control = function(vm, action) {
+exports.control = function(vm, action, program) {
   return parseCommand(vm, action);
 };

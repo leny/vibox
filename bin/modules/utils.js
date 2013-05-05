@@ -1,4 +1,4 @@
-var aAvailableCommands, aVBoxesUIDs, exec, getVBoxes, iCurrentIndex, oVBoxes, os, rClearQuotes, rSharedFolder, rVMName;
+var aAvailableCommands, aVBoxesUIDs, exec, getVBoxes, iCurrentIndex, oVBoxes, os, rClearQuotes, rClearSpaces, rSharedFolder, rVMName;
 
 exec = require('child_process').exec;
 
@@ -15,6 +15,8 @@ aAvailableCommands = ['start', 'list'];
 rVMName = /^".+"\s\{(.+)\}\s*$/;
 
 rClearQuotes = /"/g;
+
+rClearSpaces = /\s/g;
 
 rSharedFolder = /^SharedFolder(Name|Path)MachineMapping(\d+)$/i;
 
@@ -58,6 +60,7 @@ getVBoxes = function(fCallback) {
             oVMInfos[sCurrentProperty] = (_ref2 = aCurrentInfo[1]) != null ? _ref2.replace(rClearQuotes, '') : void 0;
           }
         }
+        oVMInfos.escaped_name = oVMInfos.name.replace(rClearSpaces, '_');
         oVMInfos.state = oVMInfos.VMState;
         oVMInfos.SharedFolders = aSharedFolders;
         oVBoxes[oVMInfos.UUID] = oVMInfos;
