@@ -39,6 +39,11 @@ program
     .action( require( './modules/control' ).start )
 
 program
+    .command( 'stop <uid|name>' )
+    .description( 'stop VM' )
+    .action( require( './modules/control' ).stop )
+
+program
     .command( 'control <uid|name> <action>' )
     .description( 'control VM (start|headless|pause|resume|stop|reset|poweroff)' )
     .action( require( './modules/control' ).control )

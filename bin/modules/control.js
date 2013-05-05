@@ -43,7 +43,7 @@ parseCommand = function(sVMIdentifier, sAction) {
           case 'headless':
             return startVM(oVM, true);
           case 'stop':
-            return controlVM(oVM, 'acpipowerbutton');
+            return (oVM.acpi === 'on' ? controlVM(oVM, 'acpipowerbutton') : console.log(clc.red.bold('VM "' + oVM.name + '" doesn\'t have ACPI support enabled !')));
           case 'pause':
           case 'resume':
           case 'reset':
@@ -60,6 +60,10 @@ parseCommand = function(sVMIdentifier, sAction) {
 
 exports.start = function(vm, program) {
   return parseCommand(vm, (program.headless ? 'headless' : 'start'));
+};
+
+exports.stop = function(vm) {
+  return parseCommand(vm, 'stop');
 };
 
 exports.control = function(vm, action) {

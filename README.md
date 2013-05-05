@@ -23,6 +23,7 @@ To take the benefits of completion, add the following line to your .profile, or 
     	list [options]					list VMs
 	    show [options] <uid|name> 		show information about specific VM
     	start [options] <uid|name> 		start VM
+    	stop [options] <uid|name> 		stop VM (if ACPI support is enabled)
 	    control <uid|name> <action> 	control VM (start|headless|pause|resume|stop|reset|poweroff)
 
   	Options:

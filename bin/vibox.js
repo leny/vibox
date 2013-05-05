@@ -29,6 +29,8 @@ program.command('show <uid|name>').description('show information about specific 
 
 program.command('start <uid|name>').description('start VM').option('-h, --headless', 'Start VM headless (no GUI)').action(require('./modules/control').start);
 
+program.command('stop <uid|name>').description('stop VM').action(require('./modules/control').stop);
+
 program.command('control <uid|name> <action>').description('control VM (start|headless|pause|resume|stop|reset|poweroff)').action(require('./modules/control').control);
 
 program.command('commands').description('[internal] list all commands (used for completion)').action(require('./modules/completion').commands);

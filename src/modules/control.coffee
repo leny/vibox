@@ -24,7 +24,7 @@ parseCommand = ( sVMIdentifier, sAction ) ->
                 switch sAction
                     when 'start' then return startVM oVM, no
                     when 'headless' then return startVM oVM, yes
-                    when 'stop' then return controlVM oVM, 'acpipowerbutton' # TODO: check acpi support !
+                    when 'stop' then return ( if oVM.acpi is 'on' then controlVM( oVM, 'acpipowerbutton' ) else console.log( clc.red.bold( 'VM "' + oVM.name + '" doesn\'t have ACPI support enabled !' ) ) )
                     when 'pause', 'resume', 'reset', 'poweroff'
                         return controlVM oVM, sAction
                     else return console.log clc.red.bold 'Unknow action "' + sAction + '"'
@@ -32,6 +32,9 @@ parseCommand = ( sVMIdentifier, sAction ) ->
 
 exports.start = ( vm, program ) ->
     parseCommand vm, ( if program.headless then 'headless' else 'start' )
+
+exports.stop = ( vm ) ->
+    parseCommand vm, 'stop'
 
 exports.control = ( vm, action ) ->
     parseCommand vm, action
