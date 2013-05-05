@@ -1,3 +1,5 @@
+"use strict"
+
 clc = require 'cli-color'
 os = require 'os'
 

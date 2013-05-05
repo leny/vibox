@@ -1,3 +1,5 @@
+"use strict";
+
 var os;
 
 os = require('os');
@@ -9,7 +11,7 @@ exports.commands = function() {
   return console.log('control');
 };
 
-exports.vms = function(sCommand) {
+exports.vms = function() {
   return require('./utils').getVBoxes(function(oResponse) {
     var oVMInfo, sUID, _results;
     _results = [];

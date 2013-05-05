@@ -1,3 +1,5 @@
+"use strict"
+
 exec = require( 'child_process' ).exec
 clc = require 'cli-color'
 os = require 'os'
@@ -7,11 +9,11 @@ startVM = ( oVM, bHeadless ) ->
         return console.log clc.yellow( 'VM "' + oVM.name + '" is already running !' )
     sCommand = 'VBoxManage startvm ' + oVM.UUID + ( if bHeadless then ' --type headless' else '' )
     console.log clc.yellow( 'VM "' + oVM.name + '" starting...' )
-    return exec sCommand, ( oError, sOut, sErr ) ->
+    return exec sCommand, ( oError ) ->
         console.log clc.green 'started.' if !oError
 
 controlVM = ( oVM, sAction ) ->
-    exec 'VBoxManage controlvm ' + oVM.UUID + ' ' + sAction, ( oError, sOut, sErr ) ->
+    exec 'VBoxManage controlvm ' + oVM.UUID + ' ' + sAction, ( oError, sOut ) ->
         console.log sOut if !oError
 
 parseCommand = ( sVMIdentifier, sAction ) ->
@@ -31,5 +33,5 @@ parseCommand = ( sVMIdentifier, sAction ) ->
 exports.start = ( vm, program ) ->
     parseCommand vm, ( if program.headless then 'headless' else 'start' )
 
-exports.control = ( vm, action, program ) ->
+exports.control = ( vm, action ) ->
     parseCommand vm, action

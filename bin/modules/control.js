@@ -1,3 +1,5 @@
+"use strict";
+
 var clc, controlVM, exec, os, parseCommand, startVM;
 
 exec = require('child_process').exec;
@@ -13,7 +15,7 @@ startVM = function(oVM, bHeadless) {
   }
   sCommand = 'VBoxManage startvm ' + oVM.UUID + (bHeadless ? ' --type headless' : '');
   console.log(clc.yellow('VM "' + oVM.name + '" starting...'));
-  return exec(sCommand, function(oError, sOut, sErr) {
+  return exec(sCommand, function(oError) {
     if (!oError) {
       return console.log(clc.green('started.'));
     }
@@ -21,7 +23,7 @@ startVM = function(oVM, bHeadless) {
 };
 
 controlVM = function(oVM, sAction) {
-  return exec('VBoxManage controlvm ' + oVM.UUID + ' ' + sAction, function(oError, sOut, sErr) {
+  return exec('VBoxManage controlvm ' + oVM.UUID + ' ' + sAction, function(oError, sOut) {
     if (!oError) {
       return console.log(sOut);
     }
@@ -60,6 +62,6 @@ exports.start = function(vm, program) {
   return parseCommand(vm, (program.headless ? 'headless' : 'start'));
 };
 
-exports.control = function(vm, action, program) {
+exports.control = function(vm, action) {
   return parseCommand(vm, action);
 };
