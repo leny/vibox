@@ -21,8 +21,10 @@ getVBoxes = ( fCallback ) ->
                 oVMInfos = {}
                 for sCurrentInfo in sOut.split os.EOL
                     aCurrentInfo = sCurrentInfo.split '='
-                    oVMInfos[ aCurrentInfo[ 0 ] ] = aCurrentInfo[ 1 ].replace rClearQuotes, ''
+                    oVMInfos[ aCurrentInfo[ 0 ].replace rClearQuotes, '' ] = aCurrentInfo[ 1 ]?.replace rClearQuotes, ''
                 oVMInfos.state = oVMInfos.VMState
                 oVBoxes[ oVMInfos.UUID ] = oVMInfos
                 iCurrentIndex--
                 fCallback oVBoxes if iCurrentIndex is 0
+
+exports.getVBoxes = getVBoxes

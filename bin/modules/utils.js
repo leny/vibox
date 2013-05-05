@@ -37,13 +37,13 @@ getVBoxes = function(fCallback) {
     for (_i = 0, _len = aVBoxesUIDs.length; _i < _len; _i++) {
       sCurrentVMID = aVBoxesUIDs[_i];
       _results.push(exec('VBoxManage showvminfo ' + sCurrentVMID + ' --machinereadable', function(oError, sOut, sErr) {
-        var aCurrentInfo, oVMInfos, sCurrentInfo, _j, _len1, _ref;
+        var aCurrentInfo, oVMInfos, sCurrentInfo, _j, _len1, _ref, _ref1;
         oVMInfos = {};
         _ref = sOut.split(os.EOL);
         for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
           sCurrentInfo = _ref[_j];
           aCurrentInfo = sCurrentInfo.split('=');
-          oVMInfos[aCurrentInfo[0]] = aCurrentInfo[1].replace(rClearQuotes, '');
+          oVMInfos[aCurrentInfo[0].replace(rClearQuotes, '')] = (_ref1 = aCurrentInfo[1]) != null ? _ref1.replace(rClearQuotes, '') : void 0;
         }
         oVMInfos.state = oVMInfos.VMState;
         oVBoxes[oVMInfos.UUID] = oVMInfos;
@@ -56,3 +56,5 @@ getVBoxes = function(fCallback) {
     return _results;
   });
 };
+
+exports.getVBoxes = getVBoxes;
