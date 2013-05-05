@@ -1,4 +1,4 @@
-var clc, controlVM, exec, os, startVM;
+var clc, controlVM, exec, os, parseCommand, startVM;
 
 exec = require('child_process').exec;
 
@@ -28,28 +28,14 @@ controlVM = function(oVM, sAction) {
   });
 };
 
-exports.start = function(vm, program) {
+parseCommand = function(sVMIdentifier, sAction) {
   return require('./utils').getVBoxes(function(oResponse) {
-    var oVM, sUID, sVMSearchClause;
-    sVMSearchClause = vm.trim();
+    var oVM, sUID;
+    sVMIdentifier = sVMIdentifier.trim();
     for (sUID in oResponse) {
       oVM = oResponse[sUID];
-      if (sUID === sVMSearchClause || oVM.name === sVMSearchClause) {
-        return startVM(oVM, program.headless);
-      }
-    }
-    return console.log(clc.red.bold('Unknown VM "' + sVMSearchClause + '"'));
-  });
-};
-
-exports.control = function(vm, action, program) {
-  return require('./utils').getVBoxes(function(oResponse) {
-    var oVM, sUID, sVMSearchClause;
-    sVMSearchClause = vm.trim();
-    for (sUID in oResponse) {
-      oVM = oResponse[sUID];
-      if (sUID === sVMSearchClause || oVM.name === sVMSearchClause) {
-        switch (action) {
+      if (sUID === sVMIdentifier || oVM.name === sVMIdentifier) {
+        switch (sAction) {
           case 'start':
             return startVM(oVM, false);
           case 'headless':
@@ -60,12 +46,21 @@ exports.control = function(vm, action, program) {
           case 'resume':
           case 'reset':
           case 'poweroff':
-            return controlVM(oVM, action);
+            return controlVM(oVM, sAction);
           default:
-            return console.log(clc.red.bold('Unknow action "' + action + '"'));
+            return console.log(clc.red.bold('Unknow action "' + sAction + '"'));
         }
       }
     }
-    return console.log(clc.red.bold('Unknown VM "' + sVMSearchClause + '"'));
+    return console.log(clc.red.bold('Unknown VM "' + sVMIdentifier + '"'));
   });
+};
+
+exports.start = function(vm, program) {
+  console.log(vm);
+  return parseCommand(vm, (program.headless ? 'headless' : 'start'));
+};
+
+exports.control = function(vm, action) {
+  return parseCommand(vm, action);
 };

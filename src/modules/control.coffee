@@ -14,24 +14,23 @@ controlVM = ( oVM, sAction ) ->
     exec 'VBoxManage controlvm ' + oVM.UUID + ' ' + sAction, ( oError, sOut, sErr ) ->
         console.log sOut if !oError
 
-exports.start = ( vm, program ) ->
+parseCommand = ( sVMIdentifier, sAction ) ->
     require( './utils' ).getVBoxes ( oResponse ) ->
-        sVMSearchClause = vm.trim()
+        sVMIdentifier = sVMIdentifier.trim()
         for sUID, oVM of oResponse
-            if sUID is sVMSearchClause or oVM.name is sVMSearchClause
-                return startVM oVM, program.headless
-        console.log clc.red.bold 'Unknown VM "' + sVMSearchClause + '"'
-
-exports.control = ( vm, action, program ) ->
-    require( './utils' ).getVBoxes ( oResponse ) ->
-        sVMSearchClause = vm.trim()
-        for sUID, oVM of oResponse
-            if sUID is sVMSearchClause or oVM.name is sVMSearchClause
-                switch action
+            if sUID is sVMIdentifier or oVM.name is sVMIdentifier
+                switch sAction
                     when 'start' then return startVM oVM, no
                     when 'headless' then return startVM oVM, yes
-                    when 'stop' then return controlVM oVM, 'acpipowerbutton'
+                    when 'stop' then return controlVM oVM, 'acpipowerbutton' # TODO: check acpi support !
                     when 'pause', 'resume', 'reset', 'poweroff'
-                        return controlVM oVM, action
-                    else return console.log clc.red.bold 'Unknow action "' + action + '"'
-        console.log clc.red.bold 'Unknown VM "' + sVMSearchClause + '"'
+                        return controlVM oVM, sAction
+                    else return console.log clc.red.bold 'Unknow action "' + sAction + '"'
+        console.log clc.red.bold 'Unknown VM "' + sVMIdentifier + '"'
+
+exports.start = ( vm, program ) ->
+    console.log vm
+    parseCommand vm, ( if program.headless then 'headless' else 'start' )
+
+exports.control = ( vm, action ) ->
+    parseCommand vm, action
