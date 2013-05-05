@@ -48,7 +48,7 @@ exports.exec = function(vm, program) {
     sVMSearchClause = vm.trim();
     for (sUID in oResponse) {
       oVM = oResponse[sUID];
-      if (sUID === sVMSearchClause || oVM.name === sVMSearchClause) {
+      if (sUID === sVMSearchClause || oVM.name === sVMSearchClause || oVM.escaped_name === sVMSearchClause) {
         return showInfos(oVM, program.full);
       }
     }

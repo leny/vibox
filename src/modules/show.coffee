@@ -27,6 +27,6 @@ exports.exec = ( vm, program ) ->
     require( './utils' ).getVBoxes ( oResponse ) ->
         sVMSearchClause = vm.trim()
         for sUID, oVM of oResponse
-            if sUID is sVMSearchClause or oVM.name is sVMSearchClause
+            if sUID is sVMSearchClause or oVM.name is sVMSearchClause or oVM.escaped_name is sVMSearchClause
                 return showInfos oVM, program.full
         console.log clc.red.bold 'Unknown VM "' + sVMSearchClause + '"'
