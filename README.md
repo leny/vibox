@@ -32,14 +32,19 @@ To take the benefits of completion, add the following line to your .profile, or 
     	-h, --help     output usage information
 	    -V, --version  output the version number
 
+## History
+
+**v0.0.3 (09/05/13):** Add `headless` command & completions for `control` subcommands
+
 ## Next…
 
-However it's functionnal, there still some work to do : error handler, some optimization.
+However it's functionnal, there still some work to do : error handlers, some optimization.
 
 In the future, i'll probably add support to more commands of VBoxManage.
 
 ## License
 Copyright (c) 2013 Leny (http://flatland.be)
+
 Licensed under the MIT license.
 
 * * *
