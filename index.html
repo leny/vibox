@@ -1,1 +1,463 @@
-My GitHub Page - coming soon.
+<!DOCTYPE html>
+<html lang="fr_BE">
+    <head>
+        <meta charset="UTF-8" />
+        <title>vibox - node.js cli helper for VirtualBox Management</title>
+
+        <link rel="stylesheet" href="styles/styles.css" />
+
+        <!--[if lt IE 9]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <div id="wrapper">
+            <a href="https://github.com/you" id="forkme">
+                <img src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub" />
+            </a>
+            <header>
+                <h1>
+                    vibox
+                </h1>
+                <h2>
+                    cli helper for VirtualBox Management
+                </h2>
+
+                <div id="sample" class="terminal">
+                    <div class="toolbar">
+                        <span class="name">leny &mdash; bash</span>
+                    </div>
+                    <div class="content">
+                        <p class="command"><span class="invite">machine:~ leny$</span> vibox list -s</p>
+                        <p><span class="yellow">IE7</span> <span class="cyan">{3ca17e1c-49b9-4e49-9d50-53767d2fe2bc}</span> <span class="red">poweroff</span></p>
+                        <p><span class="yellow">IE9</span> <span class="cyan">{808bd258-e1c8-460e-a421-cf78297ae0e5}</span> <span class="red">poweroff</span></p>
+                        <p><span class="yellow">IE10</span> <span class="cyan">{4e60848d-b316-42d9-80f9-b8b41bc3eed3}</span> <span class="red">poweroff</span></p>
+                        <p><span class="yellow">nodebase</span> <span class="cyan">{515004b4-fe11-4be3-9da1-8d9c84260877}</span> <span class="red">poweroff</span></p>
+                        <p><span class="yellow">hyperbase</span> <span class="cyan">{e1fbdd95-0115-45d2-be98-2250ed94716a}</span> <span class="green">running</span></p>
+                    </div>
+                </div>
+
+                <div id="intro">
+                    <p>vibox is a simple manager for your VirtualBoxes' VMs.</p>
+                    <p>In facts, it's just a wrapper over <em>VBoxManage</em>, but simplier <strong>and</strong> with completion.</p>
+                    <p>It's free, build with node.js, and made with <span title="love">&#61745;</span></p>
+                </div>
+                <hr />
+            </header>
+            <div id="content">
+                <section id="install">
+                    <h2>Getting Started</h2>
+
+                    <p>
+                        <strong>vibox</strong> is build with <a href="http://nodejs.org/" rel="external">node.js</a>, so you must have it installed on your computer.
+                    </p>
+
+                    <p>
+                        Install the module with: <code>npm install vibox</code>
+                    </p>
+
+                    <p>
+                        To take the benefits of completion, add the following line to your <span class="path">.profile</span>, or <span class="path">.bash_rc</span>, or whatever :<br />
+                        <code>which vibox > /dev/null &amp;&amp; . "$( vibox --initpath )"</code>
+                    </p>
+                </section>
+                <section id="usage">
+                    <h2>Usage</h2>
+
+                    <p>
+                        <strong>vibox</strong> is a cli tools, so you will type some commands, and vibox will do awesome things.
+                    </p>
+
+                    <nav>
+                        <strong>Quick jump:</strong>
+                        <a href="#list">list</a>
+                        <a href="#show">show</a>
+                        <a href="#control">control</a>
+                        <a href="#start">start</a>
+                        <a href="#headless">headless</a>
+                        <a href="#stop">stop</a>
+                    </nav>
+
+                    <div class="command" id="list">
+                        <h3>list</h3>
+
+                        <div class="usage">
+                            <code>
+                                vibox list [options]
+                            </code>
+
+                            <h4>Options</h4>
+
+                            <dl>
+                                <dt>-s, --state</dt>
+                                <dd>Display state of VMs</dd>
+                                <dt>-r, --running</dt>
+                                <dd>Show running VMs only</dd>
+                            </dl>
+                        </div>
+
+                        <div class="samples">
+                            <div id="list-basic" class="terminal">
+                                <div class="toolbar">
+                                    <span class="name">leny &mdash; bash &mdash; vibox list</span>
+                                </div>
+                                <div class="content">
+                                    <p class="command"><span class="invite">machine:~ leny$</span> vibox list</p>
+                                    <p><span class="yellow">IE7</span> <span class="cyan">{3ca17e1c-49b9-4e49-9d50-53767d2fe2bc}</span></p>
+                                    <p><span class="yellow">IE9</span> <span class="cyan">{808bd258-e1c8-460e-a421-cf78297ae0e5}</span></p>
+                                    <p><span class="yellow">IE10</span> <span class="cyan">{4e60848d-b316-42d9-80f9-b8b41bc3eed3}</span></p>
+                                    <p><span class="yellow">nodebase</span> <span class="cyan">{515004b4-fe11-4be3-9da1-8d9c84260877}</span></p>
+                                    <p><span class="yellow">hyperbase</span> <span class="cyan">{e1fbdd95-0115-45d2-be98-2250ed94716a}</span></p>
+                                </div>
+                            </div>
+                            <div id="list-state" class="terminal">
+                                <div class="toolbar">
+                                    <span class="name">leny &mdash; bash &mdash; vibox list -s</span>
+                                </div>
+                                <div class="content">
+                                    <p class="command"><span class="invite">machine:~ leny$</span> vibox list -s</p>
+                                    <p><span class="yellow">IE7</span> <span class="cyan">{3ca17e1c-49b9-4e49-9d50-53767d2fe2bc}</span> <span class="red">poweroff</span></p>
+                                    <p><span class="yellow">IE9</span> <span class="cyan">{808bd258-e1c8-460e-a421-cf78297ae0e5}</span> <span class="red">poweroff</span></p>
+                                    <p><span class="yellow">IE10</span> <span class="cyan">{4e60848d-b316-42d9-80f9-b8b41bc3eed3}</span> <span class="red">poweroff</span></p>
+                                    <p><span class="yellow">nodebase</span> <span class="cyan">{515004b4-fe11-4be3-9da1-8d9c84260877}</span> <span class="red">poweroff</span></p>
+                                    <p><span class="yellow">hyperbase</span> <span class="cyan">{e1fbdd95-0115-45d2-be98-2250ed94716a}</span> <span class="green">running</span></p>
+                                </div>
+                            </div>
+                            <div id="list-running" class="terminal">
+                                <div class="toolbar">
+                                    <span class="name">leny &mdash; bash &mdash; vibox list -r</span>
+                                </div>
+                                <div class="content">
+                                    <p class="command"><span class="invite">machine:~ leny$</span> vibox list -r</p>
+                                    <p><span class="yellow">hyperbase</span> <span class="cyan">{e1fbdd95-0115-45d2-be98-2250ed94716a}</span> <span class="green">running</span></p>
+                                </div>
+                            </div>
+                            <nav>
+                                <a href="#list-basic" class="active">
+                                    vibox list
+                                </a>
+                                <a href="#list-state">
+                                    vibox list -s
+                                </a>
+                                <a href="#list-running">
+                                    vibox list -r
+                                </a>
+                            </nav>
+                        </div>
+
+                        <p>
+                            The <strong>list</strong> command show you all the installed VMs on your system.<br />
+                            You can optionnaly show the state of each VM, and you can filter the results to show only the currently running VMs.
+                        </p>
+                    </div>
+
+                    <div class="command" id="show">
+                        <h3>show</h3>
+
+                        <div class="usage">
+                            <code>
+                                vibox show [options] &lt;uid|name&gt;
+                            </code>
+
+                            <h4>Options</h4>
+
+                            <dl>
+                                <dt>-f, --full</dt>
+                                <dd>Display full informations</dd>
+                            </dl>
+                        </div>
+
+                        <div class="samples">
+                            <div id="show-basic" class="terminal">
+                                <div class="toolbar">
+                                    <span class="name">leny &mdash; bash &mdash; vibox show</span>
+                                </div>
+                                <div class="content">
+                                    <p class="command"><span class="invite">machine:~ leny$</span> vibox show hyperbase</p>
+                                    <p><span class="yellow">=============</span></p>
+                                    <p><span class="yellow">= hyperbase =</span></p>
+                                    <p><span class="yellow">=============</span></p>
+                                    <p><span class="yellow">- uuid:</span> <span class="cyan">{e1fbdd95-0115-45d2-be98-2250ed94716a}</span></p>
+                                    <p><span class="yellow">- group:</span> /Local Servers</p>
+                                    <p><span class="yellow">- os:</span> Debian</p>
+                                    <p><span class="yellow">- ram:</span> 2048MB</p>
+                                    <p><span class="yellow">+ state:</span> <span class="green">running</span></p>
+                                    <p><span class="yellow">&nbsp;&nbsp;- since:</span> Thursday, May 09, 2013 16:23:30</p>
+                                    <p><span class="yellow">+ shared folders:</span> </p>
+                                    <p><span class="yellow">&nbsp;&nbsp;- flatland:</span> <span class="cyan">/Users/leny/Works/flatLand</span></p>
+                                </div>
+                            </div>
+                            <div id="show-full" class="terminal">
+                                <div class="toolbar">
+                                    <span class="name">leny &mdash; bash &mdash; vibox show -f</span>
+                                </div>
+                                <div class="content">
+                                    <p class="command"><span class="invite">machine:~ leny$</span> vibox show hyperbase</p>
+                                    <p><span class="yellow">=============</span></p>
+                                    <p><span class="yellow">= hyperbase =</span></p>
+                                    <p><span class="yellow">=============</span></p>
+                                    <p><span class="yellow">- uuid:</span> <span class="cyan">{e1fbdd95-0115-45d2-be98-2250ed94716a}</span></p>
+                                    <p><span class="yellow">- group:</span> /Local Servers</p>
+                                    <p><span class="yellow">- os:</span> Debian</p>
+                                    <p><span class="yellow">- ram:</span> 2048MB</p>
+                                    <p><span class="yellow">+ state:</span> <span class="green">running</span></p>
+                                    <p><span class="yellow">&nbsp;&nbsp;- since:</span> Thursday, May 09, 2013 16:23:30</p>
+                                    <p><span class="yellow">+ shared folders:</span> </p>
+                                    <p><span class="yellow">&nbsp;&nbsp;- flatland:</span> <span class="cyan">/Users/leny/Works/flatLand</span></p>
+                                    <p><span class="yellow">+ full informations: </span></p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- name:</span> hyperbase</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- groups:</span> /Local Servers</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- ostype:</span> Debian</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- UUID:</span> e1fbdd95-0115-45d2-be98-2250ed94716a</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- CfgFile:</span> /Users/leny/VirtualBox VMs/Local Servers/hyperbase/hyperbase.vbox</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- SnapFldr:</span> /Users/leny/VirtualBox VMs/Local Servers/hyperbase/Snapshots</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- LogFldr:</span> /Users/leny/VirtualBox VMs/Local Servers/hyperbase/Logs</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- hardwareuuid:</span> e1fbdd95-0115-45d2-be98-2250ed94716a</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- memory:</span> 2048</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- pagefusion:</span> off</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- vram:</span> 12</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- cpuexecutioncap:</span> 100</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- hpet:</span> off</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- chipset:</span> piix3</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- firmware:</span> BIOS</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- cpus:</span> 1</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- synthcpu:</span> off</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- bootmenu:</span> messageandmenu</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- boot1:</span> floppy</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- boot2:</span> dvd</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- boot3:</span> disk</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- boot4:</span> none</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- acpi:</span> on</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- ioapic:</span> off</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- pae:</span> off</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- Time offset:</span> 0rtcuseutc</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- hwvirtex:</span> on</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- hwvirtexexcl:</span> off</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- nestedpaging:</span> on</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- largepages:</span> on</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- vtxvpid:</span> on</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- VMState:</span> running</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- VMStateChangeTime:</span> 2013-05-09T14:23:30.969000000</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- monitorcount:</span> 1</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- accelerate3d:</span> off</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- accelerate2dvideo:</span> off</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- teleporterenabled:</span> off</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- teleporterport:</span> 0</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- teleporteraddress:</span> </p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- teleporterpassword:</span> </p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- tracing-enabled:</span> off</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- tracing-allow-vm-access:</span> off</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- tracing-config:</span> </p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- autostart-enabled:</span> off</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- autostart-delay:</span> 0</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- storagecontrollername0:</span> IDE</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- storagecontrollertype0:</span> PIIX4</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- storagecontrollerinstance0:</span> 0</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- storagecontrollermaxportcount0:</span> 2</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- storagecontrollerportcount0:</span> 2</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- storagecontrollerbootable0:</span> on</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- storagecontrollername1:</span> SATA</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- storagecontrollertype1:</span> IntelAhci</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- storagecontrollerinstance1:</span> 0</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- storagecontrollermaxportcount1:</span> 30</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- storagecontrollerportcount1:</span> 1</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- storagecontrollerbootable1:</span> on</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- IDE-0-0:</span> none</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- IDE-0-1:</span> none</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- IDE-1-0:</span> /Applications/VirtualBox.app/Contents/MacOS/VBoxGuestAdditions.iso</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- IDE-ImageUUID-1-0:</span> a8d5a89d-5d2d-4ec8-9545-5f4197a0598c</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- IDE-tempeject:</span> off</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- IDE-IsEjected:</span> off</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- IDE-1-1:</span> none</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- SATA-0-0:</span> /Users/leny/VirtualBox VMs/Local Servers/hyperbase/hyperbase.vdi</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- SATA-ImageUUID-0-0:</span> 914b535b-9bdd-48f2-9f8d-f0c8a0fb5147</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- natnet1:</span> nat</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- macaddress1:</span> 08002737EBA2</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- cableconnected1:</span> on</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- nic1:</span> nat</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- nictype1:</span> 82540EM</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- nicspeed1:</span> 0</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- mtu:</span> 0</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- sockSnd:</span> 64</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- sockRcv:</span> 64</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- tcpWndSnd:</span> 64</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- tcpWndRcv:</span> 64</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- hostonlyadapter2:</span> vboxnet0</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- macaddress2:</span> 080027AFF5FE</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- cableconnected2:</span> on</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- nic2:</span> hostonly</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- nictype2:</span> 82540EM</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- nicspeed2:</span> 0</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- nic3:</span> none</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- nic4:</span> none</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- nic5:</span> none</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- nic6:</span> none</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- nic7:</span> none</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- nic8:</span> none</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- hidpointing:</span> usbtablet</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- hidkeyboard:</span> ps2kbd</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- uart1:</span> off</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- uart2:</span> off</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- lpt1:</span> off</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- lpt2:</span> off</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- audio:</span> coreaudio</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- clipboard:</span> disabled</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- draganddrop:</span> disabled</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- VideoMode:</span> 720,400,0</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- vrde:</span> off</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- usb:</span> on</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- ehci:</span> off</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- VRDEActiveConnection:</span> off</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- VRDEClients:</span> 0</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- GuestMemoryBalloon:</span> 0</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- GuestOSType:</span> Linux26</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- GuestAdditionsRunLevel:</span> 2</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- GuestAdditionsVersion:</span> 4.2.12 r84980</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- GuestAdditionsFacility_VirtualBox Base Driver:</span> 50,1368109425793</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- GuestAdditionsFacility_VirtualBox System Service:</span> 50,1368109429297</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- GuestAdditionsFacility_Seamless Mode:</span> 0,1368109425792</p>
+                                    <p>&nbsp;&nbsp;<span class="yellow">- GuestAdditionsFacility_Graphics Mode:</span> 0,1368109425792</p>
+                                </div>
+                            </div>
+                            <nav>
+                                <a href="#show-basic" class="active">
+                                    vibox show
+                                </a>
+                                <a href="#show-full">
+                                    vibox show -f
+                                </a>
+                            </nav>
+                        </div>
+
+                        <p>
+                            The <strong>show</strong> command show you informations about the selected VM.<br />
+                            You can optionnaly show the full list of informations.
+                        </p>
+                    </div>
+
+                    <div class="command no-sample" id="control">
+                        <h3>control</h3>
+
+                        <div class="usage">
+                            <code>
+                                vibox control &lt;uid|name&gt; &lt;action&gt;
+                            </code>
+
+                            <h4>Actions</h4>
+
+                            <dl>
+                                <dt>start</dt>
+                                <dd>Start the selected VM</dd>
+                                <dt>headless</dt>
+                                <dd>Start the selected VM in headless mode (no GUI)</dd>
+                                <dt>pause</dt>
+                                <dd>Pause the selected VM</dd>
+                                <dt>resume</dt>
+                                <dd>Resume the selected VM</dd>
+                                <dt>reset</dt>
+                                <dd>Hard-reset the selected VM</dd>
+                                <dt>stop</dt>
+                                <dd>Send an ACPI-stop signal to the selected VM (if ACPI is enabled)</dd>
+                                <dt>poweroff</dt>
+                                <dd>Hard-stop the selected VM</dd>
+                            </dl>
+                        </div>
+
+                        <p>
+                            The <strong>control</strong> command allow you to order the selected VM to perform an action.
+                        </p>
+                    </div>
+
+                    <div class="command no-sample" id="start">
+                        <h3>start</h3>
+
+                        <div class="usage">
+                            <code>
+                                vibox start [options] &lt;uid|name&gt;
+                            </code>
+
+                            <h4>Options</h4>
+
+                            <dl>
+                                <dt>-h, --headless</dt>
+                                <dd>Start the VM in headless mode (no GUI)</dd>
+                            </dl>
+                        </div>
+
+                        <p>
+                            The <strong>start</strong> command is an alias of <code>vibox control &lt;VM&gt; start</code>.<br /> With the <em>headless</em> option is an alias of <code>vibox control &lt;VM&gt; headless</code>.
+                        </p>
+                    </div>
+
+                    <div class="command no-sample" id="headless">
+                        <h3>headless</h3>
+
+                        <div class="usage">
+                            <code>
+                                vibox headless &lt;uid|name&gt;
+                            </code>
+                        </div>
+
+                        <p>
+                            The <strong>headless</strong> command is an alias of <code>vibox control &lt;VM&gt; headless</code>.
+                        </p>
+                    </div>
+
+                    <div class="command no-sample" id="stop">
+                        <h3>stop</h3>
+
+                        <div class="usage">
+                            <code>
+                                vibox stop &lt;uid|name&gt;
+                            </code>
+                        </div>
+
+                        <p>
+                            The <strong>stop</strong> command is an alias of <code>vibox control &lt;VM&gt; stop</code>.
+                        </p>
+                    </div>
+                </section>
+                <section id="history">
+                    <h2>
+                        History
+                    </h2>
+
+                    <dl>
+                        <dt>09/05/2013:</dt>
+                        <dd><strong>v0.0.3</strong> headless command &amp; actions completions for control command</dd>
+                        <dt>06/05/2013:</dt>
+                        <dd><strong>v0.0.2</strong> stop command &amp; bugfixes</dd>
+                        <dt>05/05/2013:</dt>
+                        <dd><strong>v0.0.1</strong> basic commands &amp; completion support</dd>
+                        <dt>04/05/2013:</dt>
+                        <dd>First commit</dd>
+                    </dl>
+                </section>
+                <section id="next">
+                    <h2>
+                        Next...
+                    </h2>
+
+                    <p>However it's functionnal, there still some work to do : error handlers, some optimization.</p>
+
+                    <p>In the future, i'll probably add support for more commands of VBoxManage.</p>
+                </section>
+                <section id="license">
+                    <h2>
+                        License
+                    </h2>
+
+                    <p>Copyright (c) 2013 Leny (<a href="http://flatland.be" rel="external">http://flatland.be</a>)</p>
+
+                    <p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+
+                    <p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+
+                    <p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+                </section>
+            </div>
+        </div>
+
+        <script src="js/script.js"></script>
+    </body>
+</html>

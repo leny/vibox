@@ -1,0 +1,275 @@
+/* vibox - node.js cli helper for VirtualBox Management
+ *
+ * SASS/COMPASS/CSS Document - /styles/screen.sass
+ * Screen & responsive styles
+ * coded by leny@flatLand!
+ * started at 09/05/13
+ */
+
+// imports
+@import compass
+@import compass/reset
+
+// fonts
+@import fonts/source-sans
+$SourceSans: "SourceSans", Verdana, Helvetica, Arial, sans-serif
+@import fonts/source-code
+$SourceCode: "SourceCodePro", Incosolata, Monaco, Courrier, monospace
+@import fonts/copse
+$Copse: 'Copse', Georgia, "Times New Roman", Times, serif
+@import fonts/webhostinghub
+$Icons: 'WebHostingHub'
+
+// vars
+$white: rgb( 204, 204, 204 )
+$silver: rgb( 152, 152, 152 )
+$yellow: rgb( 255, 204, 102 )
+$cyan: rgb( 102, 204, 204 )
+$red: rgb( 242, 119, 122 )
+$green: rgb( 152, 204, 153 )
+
+// mixins
+=terminal( $size, $fontSize:1.1em, $shadowRadius: 50px )
+    width: $size
+    margin: 0 auto
+    min-height: $size * 3/4
+    +box-shadow( 0 0 $shadowRadius rgba( black, 1 ) )
+    background: #252525
+    +border-radius( 5px )
+    div.toolbar
+        position: relative
+        height: 23px
+        +background-image( linear-gradient( color-stops( #e2e2e2, #a8a8a8 ) ) )
+        +border-radius( 5px 5px 0 0 )
+        border-top: 1px solid #efefef
+        border-bottom: 1px solid #606060
+        span.name
+            display: block
+            font: normal 14px/25px $SourceSans
+            color: #333
+            text-shadow: 0 1px 1px #d7d7d7
+            text-align: center
+    div.content
+        padding: 5px
+        max-height: $size * 3/4 - 23
+        overflow: scroll
+        p
+            color: $white
+            font: normal $fontSize $SourceCode
+            margin: 0 auto
+            &.command
+                margin: 0 auto 0.25em
+            span.invite
+                color: $silver
+            span.yellow
+                color: $yellow
+            span.cyan
+                color: $cyan
+            span.red
+                color: $red
+            span.green
+                color: $green
+
+
+html
+    width: 100%
+
+body
+    font: normal 62.5%/1.25 $SourceSans
+    color: #333
+    text-rendering: optimizeLegibility
+
+#wrapper
+    margin: 0 auto
+
+#forkme
+    position: absolute
+    z-index: 20
+    top: 0
+    right: 0
+    img
+        border: 0
+
+header
+    position: relative
+    background: black image-url( 'carbon_fibre_big.png' ) top left repeat
+    min-height: 500px
+    padding: 0
+    h1
+        width: 150px
+        margin: 0 auto 10px
+        font: normal 4em/1 $Copse
+        padding: 10px 0
+        text-align: center
+        background: #ff9900
+        color: white
+        position: relative
+        left: -350px
+        text-shadow: 0 -1px 1px rgba( black, 0.5 )
+        +box-shadow( 0 0 20px rgba( black, 1 ) )
+    h2
+        width: 920px
+        margin: 0px auto 40px
+        font: normal 1.4em $SourceCode
+        color: lighten( #ff9900, 10% )
+        text-shadow: 0 0 20px black
+    #sample
+        position: relative
+        right: -200px
+        +terminal( 500px, 1.3em, 50px )
+    #intro
+        width: 300px
+        position: absolute
+        top: 220px
+        left: 50%
+        margin-left: -425px
+        p
+            color: $white
+            font: 600 1.8em $SourceSans
+            margin: 0 auto 0.75em
+            em
+                font: 200 1em $SourceCode
+            strong
+                font-weight: 700
+            span
+                font: normal 1em $Icons
+                vertical-align: -0.2em
+    hr
+        margin: 40px auto 0
+        border: 0
+        height: 20px
+        +background-image( linear-gradient( color-stops( transparent, rgba( black, 0.5 ) ) ) )
+
+#content
+    margin: 0 auto
+    padding: 1px 0
+    background: white image-url( 'old_mathematics.png' ) top left repeat
+    section
+        width: 920px
+        margin: 2.5em auto 5em
+        h2
+            margin: 0 auto 0.5em
+            font: normal 3.5em $Copse
+            color: #ff9900
+        a
+            text-decoration: none
+            color: lighten( blue, 20% )
+            +transition( color 0.5s )
+            &:hover
+                color: lighten( blue, 10% )
+        p
+            margin: 0 auto 0.75em
+            font: normal 1.6em/1.5 $SourceSans
+            strong
+                font-weight: 600
+            code
+                font: normal 0.9em $SourceCode
+                padding: 0.05em 0.3em 0
+                margin: 0 0.25em
+                color: darken( brown, 10% )
+                background: rgba( brown, 0.2 )
+                border: 1px solid rgba( brown, 0.3 )
+                +border-radius( 3px )
+            span.path
+                font: normal 1em $SourceCode
+                color: green
+        nav
+            width: 420px
+            margin: 0 auto
+            padding: 5px 10px
+            font: normal 1.4em $SourceSans
+            background: rgba( gray, 0.2 )
+            border: 1px solid rgba( gray, 0.3 )
+            color: darken( gray, 10% )
+            +border-radius( 3px )
+            text-align: center
+            +pie-clearfix()
+            strong
+                font-weight: 600
+                float: left
+            a
+                margin: 0 0.5em
+        div.command
+            margin: 35px auto
+            +pie-clearfix()
+            h3
+                margin: 0 auto 0.5em
+                font: normal 2.5em $Copse
+                color: darken( $cyan, 10% )
+            div.usage
+                background: rgba( $cyan, 0.2 )
+                border: 1px solid rgba( $cyan, 0.3 )
+                +border-radius( 3px )
+                width: 380px
+                padding: 10px
+                float: left
+                margin: 0 0 20px
+                code
+                    display: block
+                    margin: 5px 20px 10px
+                    font: bold 1.5em $SourceCode
+                    color: darken( $cyan, 30% )
+                h4
+                    font: 600 1.3em $SourceSans
+                    color: darken( $cyan, 20% )
+                    margin: 0 auto 0.5em
+                dl
+                    margin: 0 3em
+                    dt
+                        display: inline
+                        font: normal 1.2em/1.5 $SourceCode
+                        margin: 0 1em 0 0
+                        color: darken( $cyan, 30% )
+                    dd
+                        display: inline
+                        font: normal 1.3em/1.5 $SourceSans
+                        color: darken( $cyan, 20% )
+                        +pie-clearfix()
+            div.samples
+                width: 500px
+                float: right
+                +pie-clearfix()
+                div.terminal
+                    +terminal( 450px, 1.2em, 10px )
+                    margin: 0 auto 20px
+                    display: none
+                    &:first-child
+                        display: block
+                nav
+                    margin: 0 auto
+                    text-align: center
+                    border: 0
+                    background: transparent
+                    a
+                        position: relative
+                        margin: 0 1em
+                        padding: 0.125em 0.5em
+                        background: rgba( $cyan, 0.3 )
+                        +border-radius( 3px )
+                        &.active:after
+                            content: ""
+                            width: 0
+                            height: 0
+                            position: absolute
+                            top: -20px
+                            left: 50%
+                            margin: 0 0 0 -10px
+                            border: 10px solid transparent
+                            border-bottom: 10px solid rgba( $cyan, 0.3 )
+            &.no-sample
+                div.usage
+                    width: 450px
+                    float: none
+
+#history
+    dl
+        dt
+            display: block
+            font: 600 1.6em $SourceSans
+        dd
+            display: block
+            font: normal 1.5em $SourceSans
+            margin: 0 0 10px 20px
+            strong
+                font-weight: 600
+                color: darken( #ff9900, 15% )
