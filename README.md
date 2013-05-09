@@ -23,6 +23,7 @@ To take the benefits of completion, add the following line to your .profile, or 
     	list [options]					list VMs
 	    show [options] <uid|name> 		show information about specific VM
     	start [options] <uid|name> 		start VM
+        headless <uid|name>             start VM headlessly (no GUI)
     	stop [options] <uid|name> 		stop VM (if ACPI support is enabled)
 	    control <uid|name> <action> 	control VM (start|headless|pause|resume|stop|reset|poweroff)
 
@@ -38,7 +39,7 @@ However it's functionnal, there still some work to do : error handler, some opti
 In the future, i'll probably add support to more commands of VBoxManage.
 
 ## License
-Copyright (c) 2013 Leny (http://flatland.be)  
+Copyright (c) 2013 Leny (http://flatland.be)
 Licensed under the MIT license.
 
 * * *

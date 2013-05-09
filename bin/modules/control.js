@@ -62,6 +62,10 @@ exports.start = function(vm, program) {
   return parseCommand(vm, (program.headless ? 'headless' : 'start'));
 };
 
+exports.headless = function(vm, program) {
+  return parseCommand(vm, 'headless');
+};
+
 exports.stop = function(vm) {
   return parseCommand(vm, 'stop');
 };

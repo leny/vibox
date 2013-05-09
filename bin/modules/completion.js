@@ -8,6 +8,8 @@ exports.commands = function() {
   console.log('list');
   console.log('show');
   console.log('start');
+  console.log('headless');
+  console.log('stop');
   return console.log('control');
 };
 
@@ -21,4 +23,14 @@ exports.vms = function() {
     }
     return _results;
   });
+};
+
+exports.control = function() {
+  console.log('start');
+  console.log('headless');
+  console.log('stop');
+  console.log('pause');
+  console.log('resume');
+  console.log('reset');
+  return console.log('poweroff');
 };

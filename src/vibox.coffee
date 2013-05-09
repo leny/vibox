@@ -39,6 +39,11 @@ program
     .action( require( './modules/control' ).start )
 
 program
+    .command( 'headless <uid|name>' )
+    .description( 'start VM headless (no GUI)' )
+    .action( require( './modules/control' ).headless )
+
+program
     .command( 'stop <uid|name>' )
     .description( 'stop VM' )
     .action( require( './modules/control' ).stop )

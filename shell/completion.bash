@@ -8,7 +8,11 @@ _vibox_complete() {
         COMPREPLY=( $(compgen -W "$(vibox commands)" -- "$word") )
     else
         local command="${COMP_WORDS[1]}"
-        local completions="$(vibox completions "$command")"
+        if [ $command = "control" -a "$COMP_CWORD" -eq 3 ]; then
+            local completions="$(vibox control_compl)"
+        else
+            local completions="$(vibox completions "$command")"
+        fi
         COMPREPLY=( $(compgen -W "$completions" -- "$word") )
     fi
 }
