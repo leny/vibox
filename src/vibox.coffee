@@ -45,7 +45,7 @@ program
 
 program
     .command( 'stop <uid|name>' )
-    .description( 'stop VM' )
+    .description( 'stop VM using ACPI module (if enabled)' )
     .action( require( './modules/control' ).stop )
 
 program
@@ -62,6 +62,11 @@ program
     .command( 'completions <cmd>' )
     .description( '[internal] list escaped VMs names (used for completion)' )
     .action( require( './modules/completion' ).vms )
+
+program
+    .command( 'control_compl' )
+    .description( '[internal] list command for control (used for completion)' )
+    .action( require( './modules/completion' ).control )
 
 program.parse( process.argv )
 
