@@ -1,12 +1,13 @@
 # vibox
 
-*Node.js cli helper for VirtualBox management*
+![NPM version](http://img.shields.io/npm/v/vibox.svg) ![Dependency Status](https://david-dm.org/leny/vibox.svg) ![Downloads counter](http://img.shields.io/npm/dm/vibox.svg)
 
+> Node.js cli helper for VirtualBox management
+
+* * *
 vibox is a simple manager for your VirtualBoxes' VMs.
 
 In facts, it's just a wrapper over `VBoxManage`, but simplier **and** with completion (if you enable it).
-
-* * *
 
 ## Getting Started
 
