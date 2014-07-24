@@ -1,5 +1,4 @@
 "use strict";
-
 var aAvailableCommands, aVBoxesUIDs, exec, fCallback, getVBoxes, iCurrentIndex, oVBoxes, os, parseVBoxInfos, rClearQuotes, rClearSpaces, rSharedFolder, rVMName;
 
 exec = require('child_process').exec;

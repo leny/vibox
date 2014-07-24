@@ -33,7 +33,7 @@ parseCommand = ( sVMIdentifier, sAction ) ->
 exports.start = ( vm, program ) ->
     parseCommand vm, ( if program.headless then 'headless' else 'start' )
 
-exports.headless = ( vm, program ) ->
+exports.headless = ( vm ) ->
     parseCommand vm, 'headless'
 
 exports.stop = ( vm ) ->

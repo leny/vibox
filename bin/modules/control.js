@@ -1,5 +1,4 @@
 "use strict";
-
 var clc, controlVM, exec, os, parseCommand, startVM;
 
 exec = require('child_process').exec;
@@ -62,7 +61,7 @@ exports.start = function(vm, program) {
   return parseCommand(vm, (program.headless ? 'headless' : 'start'));
 };
 
-exports.headless = function(vm, program) {
+exports.headless = function(vm) {
   return parseCommand(vm, 'headless');
 };
 

@@ -1,5 +1,4 @@
 "use strict";
-
 var os;
 
 os = require('os');

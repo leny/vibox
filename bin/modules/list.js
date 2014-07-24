@@ -1,5 +1,4 @@
 "use strict";
-
 var clc, showVM;
 
 clc = require('cli-color');
