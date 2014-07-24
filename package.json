@@ -31,19 +31,19 @@
     "engines": {
         "node": ">= 0.8.0"
     },
-    "dependencies": {
-        "commander": "~1.1.1",
-        "cli-color": "~0.2.2"
-    },
-    "devDependencies": {
-        "grunt-contrib-jshint": "~0.1.1",
-        "grunt-contrib-watch": "~0.2.0",
-        "grunt-contrib-coffee": "~0.4.0",
-        "grunt-contrib-concat": "~0.3.0",
-        "grunt": "~0.4.1"
-    },
     "preferGlobal": "true",
     "bin": {
         "vibox" : "bin/vibox.js"
+    },
+    "dependencies": {
+        "commander": "~2.3",
+        "cli-color": "~0.3"
+    },
+    "devDependencies": {
+        "grunt-contrib-jshint": "~0.10",
+        "grunt-contrib-watch": "~0.6",
+        "grunt-contrib-coffee": "~0.10",
+        "grunt-contrib-concat": "~0.5",
+        "grunt": "~0.4"
     }
 }
