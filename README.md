@@ -1,6 +1,6 @@
 # vibox
 
-![NPM version](http://img.shields.io/npm/v/vibox.svg) ![Dependency Status](https://david-dm.org/leny/vibox.svg) ![Downloads counter](http://img.shields.io/npm/dm/vibox.svg)
+![NPM version](http://img.shields.io/npm/v/vibox.svg) ![Dependency Status](https://david-dm.org/leny/vibox.svg) ![Downloads counter](http://img.shields.io/npm/dm/vibox.svg) [![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
 
 > Node.js cli helper for VirtualBox management
 
